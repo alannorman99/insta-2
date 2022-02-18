@@ -8,8 +8,11 @@ import {
   MenuIcon,
 } from '@heroicons/react/outline'
 import { HomeIcon } from '@heroicons/react/solid'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 function Header() {
+  const { data: session }: any = useSession()
+
   return (
     <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
       <div className="mx-5 flex max-w-6xl justify-between lg:mx-auto">
@@ -48,23 +51,29 @@ function Header() {
         <div className="flex items-center justify-end space-x-4">
           <HomeIcon className="navBtn" />
           <MenuIcon className="h-6 cursor-pointer md:hidden" />
+          {session ? (
+            <>
+              <div className="navBtn relative">
+                <PaperAirplaneIcon className="navBtn rotate-45" />
+                <div className="absolute -top-1 -right-2 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                  3
+                </div>
+              </div>
 
-          <div className="navBtn relative">
-            <PaperAirplaneIcon className="navBtn rotate-45" />
-            <div className="absolute -top-1 -right-2 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-red-500 text-xs text-white">
-              3
-            </div>
-          </div>
+              <PlusCircleIcon className="navBtn" />
+              <UserGroupIcon className="navBtn" />
+              <HeartIcon className="navBtn" />
 
-          <PlusCircleIcon className="navBtn" />
-          <UserGroupIcon className="navBtn" />
-          <HeartIcon className="navBtn" />
-
-          <img
-            className="h-10 cursor-pointer rounded-full"
-            src="https://links.papareact.com/3ke"
-            alt="profile pic"
-          />
+              <img
+                onClick={() => signOut}
+                className="h-10 w-10 cursor-pointer rounded-full"
+                src={session.user.image}
+                alt="profile pic"
+              />
+            </>
+          ) : (
+            <button onClick={() => signIn}>Sign In</button>
+          )}
         </div>
       </div>
     </div>
