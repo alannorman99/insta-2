@@ -5,14 +5,14 @@ const posts = [
     id: '123',
     username: 'alannorman00',
     userImg: 'https://links.papareact.com/3ke',
-    img: 'https://links.papareact.com/3ke',
-    caption: 'This is nutty!',
+    img: 'https://www.rappler.com/tachyon/2022/02/demon-slayer-season-three.jpg',
+    caption: 'Need the new season!!',
   },
   {
-    id: '123',
+    id: '124',
     username: 'alannorman00',
     userImg: 'https://links.papareact.com/3ke',
-    img: 'https://links.papareact.com/3ke',
+    img: 'https://image.api.playstation.com/vulcan/ap/rnd/202106/1704/JzL1NLQvok7Pghe9W5PP2XNV.png',
     caption: 'This is nutty!',
   },
 ]

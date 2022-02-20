@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { getServerSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
 export default NextAuth({
@@ -12,5 +12,20 @@ export default NextAuth({
 	],
 	pages: {
 		signIn: "/auth/signin",
-	}
+	},
+	callbacks: {
+		async session({ session, token, user }) {
+			session.user.username = session.user.name
+				.split(" ")
+				.join("")
+				.toLocaleLowerCase()
+			//Alan Norman
+			//alannorman
+
+			//token.sub is the userid that comes back from google
+			session.user.uid = token.sub
+
+			return session;
+		},
+	},
 })
